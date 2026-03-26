@@ -15,9 +15,17 @@ spec:
     spec:
       containers:
       - name: backend
-        image: manishapasandul/hotel-backend:latest
+        image: manishapasandul/hotel-backend:1
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         env:
         - name: NODE_ENV
           value: "production"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
