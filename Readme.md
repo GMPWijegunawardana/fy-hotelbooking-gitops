@@ -5,6 +5,11 @@ df -h
 
 sudo docker system prune -a -f --volumes
 
+or 
+
+docker system prune -a -f
+docker volume prune -f
+
 This will remove:
 
 unused containers
