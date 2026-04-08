@@ -1,39 +1,29 @@
-//
+# Check system resources
 df -h
+free -h
+nproc
 
-1. Clean Docker
+# Start Docker service
+sudo systemctl start docker
 
-sudo docker system prune -a -f --volumes
+# (Optional) Clean Docker if needed
+# Only run if you run out of disk space
+# sudo docker system prune -a -f --volumes
 
-or 
+# Start Minikube
+minikube start \
+  --driver=docker \
+  --cpus=2 \
+  --memory=3500 \
+  --disk-size=20g
 
-docker system prune -a -f
-docker volume prune -f
-
-This will remove:
-
-unused containers
-unused images
-unused networks
-unused volumes
-build cache
-
-2. Clean Minikube cache
-
-minikube ssh -- docker system prune -af
-
-3. Remove old logs
-
-sudo journalctl --vacuum-time=3d
-
-4. Start Minikube again
-
-minikube start --driver=docker
+# Verify Minikube
 minikube status
+kubectl get nodes
 
-5. Reopen ArgoCD tunnel
-
+# Check ArgoCD namespace & pods
+kubectl get namespaces
 kubectl get pods -n argocd
-kubectl port-forward svc/argocd-server -n argocd 8080:443 --address 0.0.0.0
 
-//
+# Start ArgoCD port-forward to access UI
+kubectl port-forward svc/argocd-server -n argocd 8080:443 --address 0.0.0.0
