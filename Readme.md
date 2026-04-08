@@ -1,29 +1,36 @@
-# Check system resources
+#!/bin/bash
+
+# ----------------------------------------
+# Script to start Minikube & ArgoCD on EC2
+# ----------------------------------------
+
+echo "1️⃣ Checking system resources..."
 df -h
 free -h
 nproc
 
-# Start Docker service
+echo "2️⃣ Starting Docker service..."
 sudo systemctl start docker
 
-# (Optional) Clean Docker if needed
-# Only run if you run out of disk space
+# Optional: Clean Docker if needed (run manually only if out of disk space)
+# echo "Cleaning Docker..."
 # sudo docker system prune -a -f --volumes
 
-# Start Minikube
+echo "3️⃣ Starting Minikube..."
 minikube start \
   --driver=docker \
   --cpus=2 \
   --memory=3500 \
   --disk-size=20g
 
-# Verify Minikube
+echo "4️⃣ Verifying Minikube..."
 minikube status
 kubectl get nodes
 
-# Check ArgoCD namespace & pods
+echo "5️⃣ Checking ArgoCD namespace & pods..."
 kubectl get namespaces
 kubectl get pods -n argocd
 
-# Start ArgoCD port-forward to access UI
+echo "6️⃣ Starting ArgoCD port-forward..."
+echo "Use CTRL+C to stop port-forward when done"
 kubectl port-forward svc/argocd-server -n argocd 8080:443 --address 0.0.0.0
