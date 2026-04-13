@@ -57,3 +57,20 @@ echo "🔹 Starting ArgoCD port-forward..."
 echo "Use Ctrl+C to stop port-forward when needed."
 echo "Access ArgoCD UI at: https://<EC2_PUBLIC_IP>:8080"
 kubectl port-forward svc/argocd-server -n argocd 8080:443 --address 0.0.0.0
+
+
+# no need to do port forwarding now i use k3s for argo cd 
+1. first need to check k3s is running?
+sudo systemctl status k3s
+if not running 
+sudo systemctl start k3s
+
+2. fix cubectl (if needed)
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+or
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $USER:$USER ~/.kube/config
+
+3 access the url ( https ,server ip , nodeport)
+https://15.206.174.167:31430
