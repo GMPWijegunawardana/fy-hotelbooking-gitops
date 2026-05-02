@@ -15,10 +15,13 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: manishapasandul/hotel-frontend:1
+        image: manishapasandul/hotel-booking-frontend:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+        env:
+        - name: BACKEND_URL
+          value: "http://hotel-backend-service:5000"
         resources:
           requests:
             memory: "128Mi"
