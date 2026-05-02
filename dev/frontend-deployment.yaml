@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: manishapasandul/hotel-booking-frontend:latest
+        image: manishapasandul/hotel-booking-frontend:29
         imagePullPolicy: Always
         ports:
         - containerPort: 80
