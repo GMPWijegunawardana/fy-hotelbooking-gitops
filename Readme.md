@@ -11,5 +11,5 @@ mkdir -p ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chown $USER:$USER ~/.kube/config
 
-3 access the url ( https ,server ip , nodeport)
-https://15.206.174.167:31430
+3. access the url ( https ,server ip , nodeport)
+https://IP:31430
